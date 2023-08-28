@@ -4,7 +4,7 @@ import router from './routes';
 const app = express();
 const port = 3000;
 
-app.use(express.json()); // Coloque isso antes do roteador
+app.use(express.json()); // Esta linha precisa ser declarada antes do roteador, para que o EXPRESS analise corretamente o objeto JSON.
 app.use(router);
 
 app.listen(port, () => {
