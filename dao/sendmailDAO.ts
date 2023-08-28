@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
     host: '', // SMTP do serviço desejado
     port: 465, // Porta
     secure: true, // Se port = 465, true, caso contrário false
-    service: 'gmail',
+    service: '',
     auth: {
         user: '', // Endereço de email
         pass: '', // Senha do email (se for gmail, configurar senha de APP na guia de segurança do gmail)
@@ -22,8 +22,13 @@ const sendmail = async (data: ISendmail): Promise<string> => {
         from: '',
         to: '',
         subject: '',
-        html: ``,
-        text: ``, // Texto alternativo caso o serviço de email não consiga processar HTML
+        html: `
+            <h1>Nova mensagem através do seu portfólio</h1>
+            <h3>Nome: ${data.name ? data.name : 'Usuário não declarou o nome.'}\n\n</h3>
+            <p>Mensagem: ${data.message ? data.message : 'Usuário não digitou uma mensagem.'}\n\n</p>
+            <p>Contato: ${data.contact ? data.contact : 'Usuário não deixou contato.'}</p>
+        `,
+        text: `Nova mensagem através do seu portfólio: ${data.message}`, // Texto alternativo caso o serviço de email não consiga processar HTML
     };
 
     try {
