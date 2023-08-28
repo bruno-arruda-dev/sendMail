@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-const sendmail = async (data: ISendmail): Promise<void> => {
+const sendmail = async (data: ISendmail): Promise<string> => {
     const mailOptions: SendMailOptions = {
         from: '',
         to: '',
@@ -28,8 +28,10 @@ const sendmail = async (data: ISendmail): Promise<void> => {
 
     try {
         await transporter.sendMail(mailOptions);
+        return 'Email enviado com sucesso!';
     } catch (err) {
         console.log('Erro ao enviar email', err);
+        throw new Error('Erro ao enviar email');
     }
 };
 
