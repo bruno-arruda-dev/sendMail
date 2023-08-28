@@ -10,3 +10,5 @@ app.use(express.json());
 app.listen(port, () => {
     console.log(`Servidor escutando na porta ${port}`);
 });
+
+// Rodar arquivo com o comando ts-node index.ts
