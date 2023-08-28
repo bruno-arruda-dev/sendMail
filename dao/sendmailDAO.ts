@@ -1,32 +1,37 @@
-const nodemailer = require('nodemailer');
+import nodemailer, { SendMailOptions } from 'nodemailer';
+
 interface ISendmail {
     name?: string;
     contact?: string;
     message?: string;
 }
 
-const transport = nodemailer.createTransport({
-    host:'',
-    port:'',
-    secure: false,
+const transporter = nodemailer.createTransport({
+    host: '', // SMTP do serviço desejado
+    port: 465, // Porta
+    secure: true, // Se port = 465, true, caso contrário false
+    service: 'gmail',
     auth: {
-        user:'', // Insetir endereço de email
-        pass: '', // Inserir a senha (para gmail, gerar senha de app nas configurações de segurança do gmail)
+        user: '', // Endereço de email
+        pass: '', // Senha do email (se for gmail, configurar senha de APP na guia de segurança do gmail)
     },
-})
+});
 
 const sendmail = async (data: ISendmail): Promise<void> => {
-
-    transport.sendMail ({
+    const mailOptions: SendMailOptions = {
         from: '',
-        to: `Telefone ou Email informado ${data.contact}`,
-        subject: 'Nova chamada no portfólio',
-        html:``,
-        text: `Nova mensagem : ${data.message}`
-    })
-    .then(() => console.log('Email enviado com sucesso!'))
-    .catch((err: string) => console.log('Erro ao enviar email', err))
-    
+        to: '',
+        subject: '',
+        html: ``,
+        text: ``, // Texto alternativo caso o serviço de email não consiga processar HTML
+    };
+
+    try {
+        // await transporter.sendMail(mailOptions);
+        // return('Email enviado!')
+    } catch (err) {
+        // return('Erro ao enviar email', err);
+    }
 };
 
 export default sendmail;
