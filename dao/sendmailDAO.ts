@@ -27,10 +27,9 @@ const sendmail = async (data: ISendmail): Promise<void> => {
     };
 
     try {
-        // await transporter.sendMail(mailOptions);
-        // return('Email enviado!')
+        await transporter.sendMail(mailOptions);
     } catch (err) {
-        // return('Erro ao enviar email', err);
+        console.log('Erro ao enviar email', err);
     }
 };
 
